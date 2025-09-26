@@ -22,6 +22,7 @@ app.get("/users", async(req, res) => {
             if (Number.isFinite(n)){
                 filter.age = { $gt: n };
             }
+            console.warn(filter);
         }
 
         const users = await db

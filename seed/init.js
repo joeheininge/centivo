@@ -7,14 +7,14 @@ db.users.insertOne({
 });
 
 db.users.insertOne({
-    _id: ObjectId("651111111111111111111111"),
+    _id: ObjectId("651111111111111111111112"),
     name: "Suzie Minor",
     email: "suzie@minor.com",
     age: 17
 });
 
 db.users.insertOne({
-    _id: ObjectId("651111111111111111111111"),
+    _id: ObjectId("651111111111111111111113"),
     name: "Another Adult",
     email: "another@adult.com",
     age: 27
