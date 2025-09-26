@@ -1,0 +1,32 @@
+services:
+  api:
+    build: .
+    ports: 
+      - "6000:6000"
+    environment: 
+      # Note: In a production environment, these values would NOT be hard-coded in this file
+      MONGO_URI: "mongodb://mongo:27017/appdb"
+      PORT: "6000"
+    depends_on: 
+      mongo: 
+        condition: service_healthy
+    command: ["node", "dist/index.js"]
+    volumes: 
+      - .:/app
+      - /app/node_modules
+
+  mongo: 
+    image: mongo:7
+    ports: 
+      - "27017:27017"
+    volumes: 
+      - mongo_data:/data/db
+      - ./seed:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD", "mongosh", "--quiet", "mongodb://localhost:27017/appdb", "--eval", "db.adminCommand('ping')"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+
+volumes:
+  mongo_data:
